@@ -61,8 +61,18 @@ class ApiController extends Controller
         //
     }
 
-    public function update(){
-        //
+    public function update(Request $request, $id){
+        $sopir = Sopir::findOrFail($id);
+        $sopir->nama_sopir = $request->nama_sopir;
+        $sopir->alamat = $request->alamat;
+        $sopir->nomor_hp = $request->nomor_hp;
+        $sopir->save();
+        //ubah ke JSON
+        return response()->json([
+            'success' => true,
+            'message' => 'List Edit Sopir',
+            'data'    => $sopir  
+        ], 200);
     }
 
     public function destroy(){
